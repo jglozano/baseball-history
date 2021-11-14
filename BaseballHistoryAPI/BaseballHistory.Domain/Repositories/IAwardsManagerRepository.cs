@@ -4,6 +4,7 @@ namespace BaseballHistory.Domain.Repositories;
 
 public interface IAwardsManagerRepository : IDisposable
 {
-    Task<List<AwardsManager>> GetAll();
+    Task<int> GetTotalCount();
+    Task<List<AwardsManager>> GetAll(int pageNumber, int pageSize);
     Task<AwardsManager?> GetById(string playerId, short yearId, string lgId, string awardId);
 }

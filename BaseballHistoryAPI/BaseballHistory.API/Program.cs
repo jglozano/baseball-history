@@ -9,6 +9,7 @@ builder.Services.ConfigureSupervisor();
 builder.Services.AddAPILogging();
 builder.Services.AddCORS();
 builder.Services.AddCaching();
+builder.Services.AddUriService();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

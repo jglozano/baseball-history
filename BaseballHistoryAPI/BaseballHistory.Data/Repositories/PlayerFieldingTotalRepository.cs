@@ -1,8 +1,8 @@
-using BaseballHistory.Data;
 using BaseballHistory.Domain.Entities;
+using BaseballHistory.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace BaseballHistory.Domain.Repositories;
+namespace BaseballHistory.Data.Repositories;
 
 public class PlayerFieldingTotalRepository : IPlayerFieldingTotalRepository
 {
@@ -15,7 +15,15 @@ public class PlayerFieldingTotalRepository : IPlayerFieldingTotalRepository
 
     public void Dispose() => _context.Dispose();
 
-    public async Task<List<PlayerFieldingTotal>> GetAll() => await _context.PlayerFieldingTotals.AsNoTrackingWithIdentityResolution().ToListAsync();
+    public Task<int> GetTotalCount()
+    {
+        return Task.FromResult(_context.PlayerFieldingTotals.Count());
+    }
+
+    public async Task<List<PlayerFieldingTotal>> GetAll(int pageNumber, int pageSize) => await _context.PlayerFieldingTotals
+        .Skip((pageNumber - 1) * pageSize)
+        .Take(pageSize)
+        .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<PlayerFieldingTotal?> GetById(string playerId)
     {
         return await _context.PlayerFieldingTotals.FindAsync(playerId);

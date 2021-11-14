@@ -1,4 +1,6 @@
-﻿using BaseballHistory.Domain.Repositories;
+﻿using BaseballHistory.Data.Repositories;
+using BaseballHistory.Domain.Repositories;
+using BaseballHistory.Domain.Services;
 using BaseballHistory.Domain.Supervisor;
 using Microsoft.OpenApi.Models;
 
@@ -94,6 +96,18 @@ namespace BaseballHistory.API.Configurations
                         Url = new Uri("https://opensource.org/licenses/MIT")
                     }
                 });
+            });
+        }
+
+        public static void AddUriService(this IServiceCollection services)
+        {
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IUriService>(o =>
+            {
+                var accessor = o.GetRequiredService<IHttpContextAccessor>();
+                var request = accessor.HttpContext!.Request;
+                var uri = string.Concat(request.Scheme, "://" ,request.Host.ToUriComponent());
+                return new UriService(uri);
             });
         }
     }

@@ -1,8 +1,8 @@
-using BaseballHistory.Data;
 using BaseballHistory.Domain.Entities;
+using BaseballHistory.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace BaseballHistory.Domain.Repositories;
+namespace BaseballHistory.Data.Repositories;
 
 public class AwardsManagerRepository : IAwardsManagerRepository
 {
@@ -15,7 +15,15 @@ public class AwardsManagerRepository : IAwardsManagerRepository
 
     public void Dispose() => _context.Dispose();
 
-    public async Task<List<AwardsManager>> GetAll() => await _context.AwardsManagers.AsNoTrackingWithIdentityResolution().ToListAsync();
+    public Task<int> GetTotalCount()
+    {
+        return Task.FromResult(_context.AwardsManagers.Count());
+    }
+
+    public async Task<List<AwardsManager>> GetAll(int pageNumber, int pageSize) => await _context.AwardsManagers
+        .Skip((pageNumber - 1) * pageSize)
+        .Take(pageSize)
+        .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<AwardsManager?> GetById(string playerId, short yearId, string lgId, string awardId)
     {
         return await _context.AwardsManagers.FindAsync(playerId, yearId, lgId, awardId);

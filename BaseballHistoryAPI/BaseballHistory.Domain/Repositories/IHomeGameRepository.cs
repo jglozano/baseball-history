@@ -4,6 +4,7 @@ namespace BaseballHistory.Domain.Repositories;
 
 public interface IHomeGameRepository : IDisposable
 {
-    Task<List<HomeGame>> GetAll();
+    Task<int> GetTotalCount();
+    Task<List<HomeGame>> GetAll(int pageNumber, int pageSize);
     Task<HomeGame?> GetById(string teamId, string lgId, short yearId, string parkId);
 }

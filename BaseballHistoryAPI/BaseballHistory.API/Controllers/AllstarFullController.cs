@@ -1,4 +1,7 @@
 using BaseballHistory.Domain.Entities;
+using BaseballHistory.Domain.Filters;
+using BaseballHistory.Domain.Helpers;
+using BaseballHistory.Domain.Services;
 using BaseballHistory.Domain.Supervisor;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,20 +13,27 @@ public class AllstarFullController : ControllerBase
 {
     private readonly IBaseballHistorySupervisor _supervisor;
     private readonly ILogger<AllstarFullController> _logger;
+    private readonly IUriService _uriService;
 
     public AllstarFullController(IBaseballHistorySupervisor baseballHistorySupervisor,
-        ILogger<AllstarFullController> logger)
+        ILogger<AllstarFullController> logger, IUriService uriService)
     {
         _supervisor = baseballHistorySupervisor;
         _logger = logger;
+        _uriService = uriService;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<List<AllstarFull>>> Get()
+    [HttpGet("{pageNumber}/{pageSize}")]
+    public async Task<ActionResult<List<AllstarFull>>> Get(int pageNumber, int pageSize)
     {
         try
         {
-            return new ObjectResult(await _supervisor.GetAllstarFull());
+            var route = Request.Path.Value!;
+            var validFilter = new PaginationFilter(pageNumber, pageSize);
+            var pagedData = await _supervisor.GetAllstarFull(pageNumber, pageSize);
+            var totalRecords = await _supervisor.GetAllStarCount();
+            var pagedReponse = PaginationHelper.CreatePagedReponse(pagedData, validFilter, totalRecords, _uriService, route);
+            return new ObjectResult(pagedReponse);
         }
         catch (Exception ex)
         {

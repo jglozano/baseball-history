@@ -1,8 +1,8 @@
-using BaseballHistory.Data;
 using BaseballHistory.Domain.Entities;
+using BaseballHistory.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace BaseballHistory.Domain.Repositories;
+namespace BaseballHistory.Data.Repositories;
 
 public class TeamsHalfRepository : ITeamsHalfRepository
 {
@@ -15,7 +15,15 @@ public class TeamsHalfRepository : ITeamsHalfRepository
 
     public void Dispose() => _context.Dispose();
 
-    public async Task<List<TeamsHalf>> GetAll() => await _context.TeamsHalves.AsNoTrackingWithIdentityResolution().ToListAsync();
+    public Task<int> GetTotalCount()
+    {
+        return Task.FromResult(_context.TeamsHalves.Count());
+    }
+
+    public async Task<List<TeamsHalf>> GetAll(int pageNumber, int pageSize) => await _context.TeamsHalves
+        .Skip((pageNumber - 1) * pageSize)
+        .Take(pageSize)
+        .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<TeamsHalf?> GetById(string teamId, short yearId, string lgId, string half)
     {
         return await _context.TeamsHalves.FindAsync(teamId, yearId, lgId, lgId, half);

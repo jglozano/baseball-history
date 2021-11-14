@@ -4,6 +4,7 @@ namespace BaseballHistory.Domain.Repositories;
 
 public interface ITeamBattingTotalRepository : IDisposable
 {
-    Task<List<TeamBattingTotal>> GetAll();
+    Task<int> GetTotalCount();
+    Task<List<TeamBattingTotal>> GetAll(int pageNumber, int pageSize);
     Task<TeamBattingTotal?> GetById(string teamId, short yearId, string lgId);
 }

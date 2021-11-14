@@ -4,6 +4,7 @@ namespace BaseballHistory.Domain.Repositories;
 
 public interface IPitchingPostRepository : IDisposable
 {
-    Task<List<PitchingPost>> GetAll();
+    Task<int> GetTotalCount();
+    Task<List<PitchingPost>> GetAll(int pageNumber, int pageSize);
     Task<PitchingPost?> GetById(string playerId, string teamId, short yearId, string lgId, string round);
 }

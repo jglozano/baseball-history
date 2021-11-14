@@ -4,6 +4,7 @@ namespace BaseballHistory.Domain.Repositories;
 
 public interface IParkRepository : IDisposable
 {
-    Task<List<Park>> GetAll();
+    Task<int> GetTotalCount();
+    Task<List<Park>> GetAll(int pageNumber, int pageSize);
     Task<Park?> GetById(string parkId);
 }

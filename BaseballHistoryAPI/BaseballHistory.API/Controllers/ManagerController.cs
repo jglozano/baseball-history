@@ -1,4 +1,7 @@
 using BaseballHistory.Domain.Entities;
+using BaseballHistory.Domain.Filters;
+using BaseballHistory.Domain.Helpers;
+using BaseballHistory.Domain.Services;
 using BaseballHistory.Domain.Supervisor;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,20 +13,27 @@ public class ManagerController : ControllerBase
 {
     private readonly IBaseballHistorySupervisor _supervisor;
     private readonly ILogger<ManagerController> _logger;
+    private readonly IUriService _uriService;
 
     public ManagerController(IBaseballHistorySupervisor baseballHistorySupervisor,
-        ILogger<ManagerController> logger)
+        ILogger<ManagerController> logger, IUriService uriService)
     {
         _supervisor = baseballHistorySupervisor;
         _logger = logger;
+        _uriService = uriService;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<List<Manager>>> Get()
+    [HttpGet("{pageNumber}/{pageSize}")]
+    public async Task<ActionResult<List<Manager>>> Get(int pageNumber, int pageSize)
     {
         try
         {
-            return new ObjectResult(await _supervisor.GetManager());
+            var route = Request.Path.Value!;
+            var validFilter = new PaginationFilter(pageNumber, pageSize);
+            var pagedData = await _supervisor.GetManager(pageNumber, pageSize);
+            var totalRecords = await _supervisor.GetManagerCount();
+            var pagedReponse = PaginationHelper.CreatePagedReponse(pagedData, validFilter, totalRecords, _uriService, route);
+            return new ObjectResult(pagedReponse);
         }
         catch (Exception ex)
         {

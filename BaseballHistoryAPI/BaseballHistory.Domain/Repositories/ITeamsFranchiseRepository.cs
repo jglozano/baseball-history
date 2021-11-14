@@ -4,6 +4,7 @@ namespace BaseballHistory.Domain.Repositories;
 
 public interface ITeamsFranchiseRepository : IDisposable
 {
-    Task<List<TeamsFranchise>> GetAll();
+    Task<int> GetTotalCount();
+    Task<List<TeamsFranchise>> GetAll(int pageNumber, int pageSize);
     Task<TeamsFranchise?> GetById(string franchId);
 }

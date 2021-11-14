@@ -869,11 +869,11 @@ namespace BaseballHistory.Data
                 entity.Property(e => e.DeathYear).HasColumnName("deathYear");
 
                 entity.Property(e => e.Debut)
-                    .HasColumnType("date")
+                    .HasMaxLength(255)
                     .HasColumnName("debut");
 
                 entity.Property(e => e.FinalGame)
-                    .HasColumnType("date")
+                    .HasMaxLength(255)
                     .HasColumnName("finalGame");
 
                 entity.Property(e => e.Height).HasColumnName("height");

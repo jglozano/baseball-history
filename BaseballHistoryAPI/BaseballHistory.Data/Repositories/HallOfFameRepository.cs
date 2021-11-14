@@ -1,8 +1,8 @@
-using BaseballHistory.Data;
 using BaseballHistory.Domain.Entities;
+using BaseballHistory.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace BaseballHistory.Domain.Repositories;
+namespace BaseballHistory.Data.Repositories;
 
 public class HallOfFameRepository : IHallOfFameRepository
 {
@@ -15,7 +15,15 @@ public class HallOfFameRepository : IHallOfFameRepository
 
     public void Dispose() => _context.Dispose();
 
-    public async Task<List<HallOfFame>> GetAll() => await _context.HallOfFames.AsNoTrackingWithIdentityResolution().ToListAsync();
+    public Task<int> GetTotalCount()
+    {
+        return Task.FromResult(_context.HallOfFames.Count());
+    }
+
+    public async Task<List<HallOfFame>> GetAll(int pageNumber, int pageSize) => await _context.HallOfFames
+        .Skip((pageNumber - 1) * pageSize)
+        .Take(pageSize)
+        .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<HallOfFame?> GetById(string playerId, short yearId, string votedBy)
     {
         return await _context.HallOfFames.FindAsync(playerId, yearId, votedBy);

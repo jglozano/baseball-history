@@ -48,8 +48,8 @@ namespace BaseballHistory.Domain.Entities
         public short? Height { get; set; }
         public string? Bats { get; set; }
         public string? Throws { get; set; }
-        public DateTime? Debut { get; set; }
-        public DateTime? FinalGame { get; set; }
+        public string? Debut { get; set; }
+        public string? FinalGame { get; set; }
 
         public virtual ICollection<AllstarFull> AllstarFulls { get; set; }
         public virtual ICollection<Appearance> Appearances { get; set; }

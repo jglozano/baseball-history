@@ -4,6 +4,7 @@ namespace BaseballHistory.Domain.Repositories;
 
 public interface IManagersHalfRepository : IDisposable
 {
-    Task<List<ManagersHalf>> GetAll();
+    Task<int> GetTotalCount();
+    Task<List<ManagersHalf>> GetAll(int pageNumber, int pageSize);
     Task<ManagersHalf?> GetById(string playerId, string teamId, short yearId, string lgId, short inseason, short half);
 }

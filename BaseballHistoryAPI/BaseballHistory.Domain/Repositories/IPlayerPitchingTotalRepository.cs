@@ -4,6 +4,7 @@ namespace BaseballHistory.Domain.Repositories;
 
 public interface IPlayerPitchingTotalRepository : IDisposable
 {
-    Task<List<PlayerPitchingTotal>> GetAll();
+    Task<int> GetTotalCount();
+    Task<List<PlayerPitchingTotal>> GetAll(int pageNumber, int pageSize);
     Task<PlayerPitchingTotal?> GetById(string playerId);
 }

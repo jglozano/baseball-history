@@ -1,8 +1,8 @@
-using BaseballHistory.Data;
 using BaseballHistory.Domain.Entities;
+using BaseballHistory.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace BaseballHistory.Domain.Repositories;
+namespace BaseballHistory.Data.Repositories;
 
 public class AwardsSharePlayerRepository : IAwardsSharePlayerRepository
 {
@@ -15,7 +15,15 @@ public class AwardsSharePlayerRepository : IAwardsSharePlayerRepository
 
     public void Dispose() => _context.Dispose();
 
-    public async Task<List<AwardsSharePlayer>> GetAll() => await _context.AwardsSharePlayers.AsNoTrackingWithIdentityResolution().ToListAsync();
+    public Task<int> GetTotalCount()
+    {
+        return Task.FromResult(_context.AwardsSharePlayers.Count());
+    }
+
+    public async Task<List<AwardsSharePlayer>> GetAll(int pageNumber, int pageSize) => await _context.AwardsSharePlayers
+        .Skip((pageNumber - 1) * pageSize)
+        .Take(pageSize)
+        .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<AwardsSharePlayer?> GetById(string playerId, short yearId, string lgId, string awardId)
     {
         return await _context.AwardsSharePlayers.FindAsync(playerId, yearId, lgId, awardId);

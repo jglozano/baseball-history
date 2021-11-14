@@ -4,6 +4,7 @@ namespace BaseballHistory.Domain.Repositories;
 
 public interface ICollegePlayingRepository : IDisposable
 {
-    Task<List<CollegePlaying>> GetAll();
+    Task<int> GetTotalCount();
+    Task<List<CollegePlaying>> GetAll(int pageNumber, int pageSize);
     Task<CollegePlaying?> GetById(string playerId, short yearId, string schoolId);
 }
