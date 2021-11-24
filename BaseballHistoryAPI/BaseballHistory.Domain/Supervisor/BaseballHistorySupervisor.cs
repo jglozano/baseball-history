@@ -107,6 +107,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
         return await _allstarFullRepository.GetById(playerId, teamId, lgId, yearId, gameId);
     }
 
+    public async Task<List<AllstarFull>> GetAllstarFullByPlayerId(string playerId)
+    {
+        return await _allstarFullRepository.GetByPlayerId(playerId);
+    }
+
     public Task<int> GetAppearanceCount()
     {
         return _appearanceRepository.GetTotalCount();
@@ -117,6 +122,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
     public async Task<Appearance?> GetAppearanceById(string playerId, short yearId, string lgId, string teamId)
     {
         return await _appearanceRepository.GetById(playerId, yearId, lgId, teamId);
+    }
+
+    public async Task<List<Appearance>> GetAppearanceByPlayerId(string playerId)
+    {
+        return await _appearanceRepository.GetByPlayerId(playerId);
     }
 
     public Task<int> GetAwardsManagerCount()
@@ -131,6 +141,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
         return await _awardsManagerRepository.GetById(playerId, yearId, lgId, awardId);
     }
 
+    public async Task<List<AwardsManager>> GetAwardsManagerByPlayerId(string playerId)
+    {
+        return await _awardsManagerRepository.GetByPlayerId(playerId);
+    }
+
     public Task<int> GetAwardsPlayerCount()
     {
         return _awardsPlayerRepository.GetTotalCount();
@@ -141,6 +156,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
     public async Task<AwardsPlayer?> GetAwardsPlayerById(string playerId, short yearId, string lgId, string awardId)
     {
         return await _awardsPlayerRepository.GetById(playerId, yearId, lgId, awardId);
+    }
+
+    public async Task<List<AwardsPlayer>> GetAwardsPlayerByPlayerId(string playerId)
+    {
+        return await _awardsPlayerRepository.GetByPlayerId(playerId);
     }
 
     public Task<int> GetAwardsShareManagerCount()
@@ -155,9 +175,14 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
         return await _awardsShareManagerRepository.GetById(playerId, yearId, lgId, awardId);
     }
 
+    public async Task<List<AwardsShareManager>> GetAwardsShareManagerByPlayerId(string playerId)
+    {
+        return await _awardsShareManagerRepository.GetByPlayerId(playerId);
+    }
+
     public Task<int> GetAwardsSharePlayerCount(int pageNumber, int pageSize)
     {
-        throw new NotImplementedException();
+        return _awardsSharePlayerRepository.GetTotalCount();
     }
 
     public Task<int> GetAwardsSharePlayerCount()
@@ -172,6 +197,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
         return await _awardsSharePlayerRepository.GetById(playerId, yearId, lgId, awardId);
     }
 
+    public async Task<List<AwardsSharePlayer>> GetAwardsSharePlayerByPlayerId(string playerId)
+    {
+        return await _awardsSharePlayerRepository.GetByPlayerId(playerId);
+    }
+
     public Task<int> GetBattingCount()
     {
         return _battingRepository.GetTotalCount();
@@ -182,6 +212,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
     public async Task<Batting?> GetBattingById(string playerId, string teamId, short yearId, string lgId, short stint)
     {
         return await _battingRepository.GetById(playerId, teamId, yearId, lgId, stint);
+    }
+
+    public async Task<List<Batting>> GetBattingByPlayerId(string playerId)
+    {
+        return await _battingRepository.GetByPlayerId(playerId);
     }
 
     public Task<int> GetBattingPostCount()
@@ -196,6 +231,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
         return await _battingPostRepository.GetById(playerId, teamId, yearId, lgId, round);
     }
 
+    public async Task<List<BattingPost>> GetBattingPostByPlayerId(string playerId)
+    {
+        return await _battingPostRepository.GetByPlayerId(playerId);
+    }
+
     public Task<int> GetCollegePlayingCount()
     {
         return _collegePlayingRepository.GetTotalCount();
@@ -206,6 +246,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
     public async Task<CollegePlaying?> GetCollegePlayingById(string playerId, short yearId, string schoolId)
     {
         return await _collegePlayingRepository.GetById(playerId, yearId, schoolId);
+    }
+
+    public async Task<List<CollegePlaying>> GetCollegePlayingByPlayerId(string playerId)
+    {
+        return await _collegePlayingRepository.GetByPlayerId(playerId);
     }
 
     public Task<int> GetFieldingCount()
@@ -220,6 +265,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
         return await _fieldingRepository.GetById(playerId, teamId, yearId, lgId, stint, pos);
     }
 
+    public async Task<List<Fielding>> GetFieldingByPlayerId(string playerId)
+    {
+        return await _fieldingRepository.GetByPlayerId(playerId);
+    }
+
     public Task<int> GetFieldingOfCount()
     {
         return _fieldingOfRepository.GetTotalCount();
@@ -230,6 +280,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
     public async Task<FieldingOf?> GetFieldingOfById(string playerId, short yearId, short stint)
     {
         return await _fieldingOfRepository.GetById(playerId, yearId, stint);
+    }
+
+    public async Task<List<FieldingOf>> GetFieldingOfByPlayerId(string playerId)
+    {
+        return await _fieldingOfRepository.GetByPlayerId(playerId);
     }
 
     public Task<int> GetFieldingOfsplitCount()
@@ -244,6 +299,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
         return await _fieldingOfsplitRepository.GetById(playerId, teamId, yearId, lgId, stint, pos);
     }
 
+    public async Task<List<FieldingOfsplit>> GetFieldingOfsplitByPlayerId(string playerId)
+    {
+        return await _fieldingOfsplitRepository.GetByPlayerId(playerId);
+    }
+
     public Task<int> GetFieldingPostCount()
     {
         return _fieldingPostRepository.GetTotalCount();
@@ -254,6 +314,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
     public async Task<FieldingPost?> GetFieldingPostById(string playerId, string teamId, short yearId, string lgId, string round, string pos)
     {
         return await _fieldingPostRepository.GetById(playerId, teamId, yearId, lgId, round, pos);
+    }
+
+    public async Task<List<FieldingPost>> GetFieldingPostByPlayerId(string playerId)
+    {
+        return await _fieldingPostRepository.GetByPlayerId(playerId);
     }
 
     public Task<int> GetHallOfFameCount()
@@ -268,6 +333,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
         return await _hallOfFameRepository.GetById(playerId, yearId, votedBy);
     }
 
+    public async Task<List<HallOfFame>> GetHallOfFameByPlayerId(string playerId)
+    {
+        return await _hallOfFameRepository.GetByPlayerId(playerId);
+    }
+
     public Task<int> GetHomeGameCount()
     {
         return _homeGameRepository.GetTotalCount();
@@ -278,6 +348,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
     public async Task<HomeGame?> GetHomeGameById(string teamId, string lgId, short yearId, string parkId)
     {
         return await _homeGameRepository.GetById(teamId, lgId, yearId, parkId);
+    }
+
+    public async Task<List<HomeGame>> GetHomeGameByTeamId(string teamId, string lgId, short yearId)
+    {
+        return await _homeGameRepository.GetByTeamId(teamId, lgId, yearId);
     }
 
     public Task<int> GetManagerCount()
@@ -292,6 +367,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
         return await _managerRepository.GetById(playerId, teamId, yearId, lgId, inseason);
     }
 
+    public async Task<List<Manager>> GetManagerByPlayerId(string playerId)
+    {
+        return await _managerRepository.GetByPlayerId(playerId);
+    }
+
     public Task<int> GetManagersHalfCount()
     {
         return _managersHalfRepository.GetTotalCount();
@@ -302,6 +382,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
     public async Task<ManagersHalf?> GetManagersHalfById(string playerId, string teamId, short yearId, string lgId, short inseason, short half)
     {
         return await _managersHalfRepository.GetById(playerId, teamId, yearId, lgId, inseason, half);
+    }
+
+    public async Task<List<ManagersHalf>> GetManagersHalfByPlayerId(string playerId)
+    {
+        return await _managersHalfRepository.GetByPlayerId(playerId);
     }
 
     public Task<int> GetParkCount()
@@ -328,6 +413,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
         return await _personRepository.GetById(playerId);
     }
 
+    public async Task<List<Person>> GetPersonByLastName(string lastName)
+    {
+        return await _personRepository.GetPlayerByLastName(lastName);
+    }
+
     public Task<int> GetPitchingCount()
     {
         return _pitchingRepository.GetTotalCount();
@@ -340,6 +430,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
         return await _pitchingRepository.GetById(playerId, teamId, yearId, lgId, stint);
     }
 
+    public async Task<List<Pitching>> GetPitchingByPlayerId(string playerId)
+    {
+        return await _pitchingRepository.GetByPlayerId(playerId);
+    }
+
     public Task<int> GetPitchingPostCount()
     {
         return _pitchingPostRepository.GetTotalCount();
@@ -350,6 +445,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
     public async Task<PitchingPost?> GetPitchingPostById(string playerId, string teamId, short yearId, string lgId, string round)
     {
         return await _pitchingPostRepository.GetById(playerId, teamId, yearId, lgId, round);
+    }
+
+    public async Task<List<PitchingPost>> GetPitchingPostByPlayerId(string playerId)
+    {
+        return await _pitchingPostRepository.GetByPlayerId(playerId);
     }
 
     public Task<int> GetPlayerBattingTotalCount()
@@ -400,6 +500,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
         return await _salaryRepository.GetById(playerId, teamId, yearId, lgId);
     }
 
+    public async Task<List<Salary>> GetSalaryByPlayerId(string playerId)
+    {
+        return await _salaryRepository.GetByPlayerId(playerId);
+    }
+
     public Task<int> GetSchoolCount()
     {
         return _schoolRepository.GetTotalCount();
@@ -424,6 +529,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
         return await _seriesPostRepository.GetById(teamIdwinner, lgIdwinner, yearId, round);
     }
 
+    public async Task<List<SeriesPost>> GetSeriesPostByTeamId(string teamId)
+    {
+        return await _seriesPostRepository.GetByTeamId(teamId);
+    }
+
     public Task<int> GetTeamCount()
     {
         return _teamRepository.GetTotalCount();
@@ -434,6 +544,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
     public async Task<Team?> GetTeamById(string teamId, short yearId, string lgId)
     {
         return await _teamRepository.GetById(teamId, yearId, lgId);
+    }
+
+    public async Task<List<Team>> GetTeamByFranchId(string franchId)
+    {
+        return await _teamRepository.GetTeamByFranchId(franchId);
     }
 
     public Task<int> GetTeamBattingTotalCount()
@@ -448,6 +563,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
         return await _teamBattingTotalRepository.GetById(teamId, yearId, lgId);
     }
 
+    public async Task<List<TeamBattingTotal>> GetTeamBattingTotalByTeamId(string teamId)
+    {
+        return await _teamBattingTotalRepository.GetByTeamId(teamId);
+    }
+
     public Task<int> GetTeamFieldingTotalCount()
     {
         return _teamFieldingTotalRepository.GetTotalCount();
@@ -460,6 +580,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
         return await _teamFieldingTotalRepository.GetById(teamId, yearId, lgId);
     }
 
+    public async Task<List<TeamFieldingTotal>> GetTeamFieldingTotalByTeamId(string teamId)
+    {
+        return await _teamFieldingTotalRepository.GetByTeamId(teamId);
+    }
+
     public Task<int> GetTeamPitchingTotalCount()
     {
         return _teamPitchingTotalRepository.GetTotalCount();
@@ -470,6 +595,11 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
     public async Task<TeamPitchingTotal?> GetTeamPitchingTotalById(string teamId, short yearId, string lgId)
     {
         return await _teamPitchingTotalRepository.GetById(teamId, yearId, lgId);
+    }
+
+    public async Task<List<TeamPitchingTotal>> GetTeamPitchingTotalByTeamId(string teamId)
+    {
+        return await _teamPitchingTotalRepository.GetByTeamId(teamId);
     }
 
     public Task<int> GetTeamsFranchiseCount()
@@ -494,5 +624,10 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
     public async Task<TeamsHalf?> GetTeamsHalfById(string teamId, short yearId, string lgId, string half)
     {
         return await _teamsHalfRepository.GetById(teamId, yearId, lgId, half);
+    }
+
+    public async Task<List<TeamsHalf>> GetTeamsHalfByTeamId(string teamId)
+    {
+        return await _teamsHalfRepository.GetByTeamId(teamId);
     }
 }

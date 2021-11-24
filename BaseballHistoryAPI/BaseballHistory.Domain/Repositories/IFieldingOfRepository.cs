@@ -7,4 +7,5 @@ public interface IFieldingOfRepository : IDisposable
     Task<int> GetTotalCount();
     Task<List<FieldingOf>> GetAll(int pageNumber, int pageSize);
     Task<FieldingOf?> GetById(string playerId, short yearId, short stint);
+    Task<List<FieldingOf>> GetByPlayerId(string playerId);
 }

@@ -26,6 +26,6 @@ public class PlayerBattingTotalRepository : IPlayerBattingTotalRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<PlayerBattingTotal?> GetById(string playerId)
     {
-        return await _context.PlayerBattingTotals.FindAsync(playerId);
+        return await _context.PlayerBattingTotals.FirstOrDefaultAsync(p => p.PlayerId == playerId);
     }
 }

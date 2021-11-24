@@ -26,6 +26,11 @@ public class FieldingOfRepository : IFieldingOfRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<FieldingOf?> GetById(string playerId, short yearId, short stint)
     {
-        return await _context.FieldingOfs.FindAsync(playerId, yearId, stint);
+        return await _context.FieldingOfs.FirstOrDefaultAsync(e => e.PlayerId == playerId && e.YearId == yearId && e.Stint == stint);
+    }
+
+    public async Task<List<FieldingOf>> GetByPlayerId(string playerId)
+    {
+        return await _context.FieldingOfs.Where(e => e.PlayerId == playerId).ToListAsync();
     }
 }

@@ -7,4 +7,5 @@ public interface IAllstarFullRepository : IDisposable
     Task<int> GetTotalCount();
     Task<List<AllstarFull>> GetAll(int pageNumber, int pageSize);
     Task<AllstarFull?> GetById(string playerId, string teamId, string lgId, short yearId, string gameId);
+    Task<List<AllstarFull>> GetByPlayerId(string playerId);
 }

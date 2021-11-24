@@ -26,6 +26,11 @@ public class HomeGameRepository : IHomeGameRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<HomeGame?> GetById(string teamId, string lgId, short yearId, string parkId)
     {
-        return await _context.HomeGames.FindAsync(teamId, lgId, yearId, parkId);
+        return await _context.HomeGames.FirstOrDefaultAsync(e => e.TeamId == teamId && e.YearId == yearId && e.LgId == lgId && e.ParkId == parkId);
+    }
+
+    public async Task<List<HomeGame>> GetByTeamId(string teamId, string lgId, short yearId)
+    {
+        return await _context.HomeGames.Where(e => e.TeamId == teamId && e.YearId == yearId && e.LgId == lgId).ToListAsync();
     }
 }

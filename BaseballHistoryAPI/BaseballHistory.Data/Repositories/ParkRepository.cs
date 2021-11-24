@@ -26,6 +26,6 @@ public class ParkRepository : IParkRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<Park?> GetById(string parkId)
     {
-        return await _context.Parks.FindAsync(parkId);
+        return await _context.Parks.FirstOrDefaultAsync(e => e.ParkId == parkId);
     }
 }

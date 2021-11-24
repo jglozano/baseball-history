@@ -59,13 +59,13 @@ namespace BaseballHistory.Domain.Entities
         public short? Cg { get; set; }
         public short? Sho { get; set; }
         public short? Sv { get; set; }
-        public short? Ipouts { get; set; }
+        public int? Ipouts { get; set; }
         public short? Ha { get; set; }
         public short? Hra { get; set; }
         public short? Bba { get; set; }
         public short? Soa { get; set; }
-        public short? E { get; set; }
-        public short? Dp { get; set; }
+        public int? E { get; set; }
+        public int? Dp { get; set; }
         public short? Fp { get; set; }
         public string? Name { get; set; }
         public string? Park { get; set; }

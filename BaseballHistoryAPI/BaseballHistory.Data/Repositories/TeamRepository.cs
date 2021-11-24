@@ -26,6 +26,11 @@ public class TeamRepository : ITeamRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<Team?> GetById(string teamId, short yearId, string lgId)
     {
-        return await _context.Teams.FindAsync(teamId, yearId, lgId);
+        return await _context.Teams.FirstOrDefaultAsync(e => e.TeamId == teamId && e.YearId == yearId && e.LgId == lgId);
+    }
+
+    public async Task<List<Team>> GetTeamByFranchId(string franchId)
+    {
+        return await _context.Teams.Where(e => e.FranchId == franchId).ToListAsync();
     }
 }

@@ -59,4 +59,19 @@ public class ManagerController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
+    
+    // playerId
+    [HttpGet("{playerId}", Name = "GetManagerByPlayerId")]
+    public async Task<ActionResult<List<Manager>>> Get(string playerId)
+    {
+        try
+        {
+            return Ok(await _supervisor.GetManagerByPlayerId(playerId));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Something went wrong inside the ManagerController GetByPlayerId action: {ex}");
+            return StatusCode(500, "Internal server error");
+        }
+    }
 }

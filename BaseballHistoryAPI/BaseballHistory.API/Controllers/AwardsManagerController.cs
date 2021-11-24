@@ -59,4 +59,19 @@ public class AwardsManagerController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
+    
+    // playerId
+    [HttpGet("{playerId}", Name = "GetAwardsManagerByPlayerId")]
+    public async Task<ActionResult<List<AwardsManager>>> Get(string playerId)
+    {
+        try
+        {
+            return Ok(await _supervisor.GetAwardsManagerByPlayerId(playerId));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Something went wrong inside the AwardsManagerController GetByPlayerId action: {ex}");
+            return StatusCode(500, "Internal server error");
+        }
+    }
 }

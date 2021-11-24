@@ -26,6 +26,11 @@ public class FieldingOfsplitRepository : IFieldingOfsplitRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<FieldingOfsplit?> GetById(string playerId, string teamId, short yearId, string lgId, short stint, string pos)
     {
-        return await _context.FieldingOfsplits.FindAsync(playerId, teamId, yearId, lgId, stint, pos);
+        return await _context.FieldingOfsplits.FirstOrDefaultAsync(e => e.PlayerId == playerId && e.YearId == yearId && e.LgId == lgId && e.TeamId == teamId && e.Stint ==  stint && e.Pos == pos);
+    }
+
+    public async Task<List<FieldingOfsplit>> GetByPlayerId(string playerId)
+    {
+        return await _context.FieldingOfsplits.Where(e => e.PlayerId == playerId).ToListAsync();
     }
 }

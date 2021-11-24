@@ -59,4 +59,19 @@ public class PersonController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
+    
+    // lastName
+    [HttpGet("{lastName}", Name = "GetPersonByLastName")]
+    public async Task<ActionResult<List<Person>>> GetByLastName(string lastName)
+    {
+        try
+        {
+            return Ok(await _supervisor.GetPersonByLastName(lastName));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Something went wrong inside the PersonController GetByLastName action: {ex}");
+            return StatusCode(500, "Internal server error");
+        }
+    }
 }

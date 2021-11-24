@@ -7,4 +7,5 @@ public interface ITeamRepository : IDisposable
     Task<int> GetTotalCount();
     Task<List<Team>> GetAll(int pageNumber, int pageSize);
     Task<Team?> GetById(string teamId, short yearId, string lgId);
+    Task<List<Team>> GetTeamByFranchId(string franchId);
 }

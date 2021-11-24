@@ -26,6 +26,11 @@ public class PersonRepository : IPersonRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<Person?> GetById(string playerId)
     {
-        return await _context.People.FindAsync(playerId);
+        return await _context.People.FirstOrDefaultAsync(e => e.PlayerId == playerId);
+    }
+
+    public async Task<List<Person>> GetPlayerByLastName(string lastName)
+    {
+        return await _context.People.Where(e => e.NameLast == lastName).ToListAsync();
     }
 }

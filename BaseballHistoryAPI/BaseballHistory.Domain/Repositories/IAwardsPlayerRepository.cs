@@ -7,4 +7,5 @@ public interface IAwardsPlayerRepository : IDisposable
     Task<int> GetTotalCount();
     Task<List<AwardsPlayer>> GetAll(int pageNumber, int pageSize);
     Task<AwardsPlayer?> GetById(string playerId, short yearId, string lgId, string awardId);
+    Task<List<AwardsPlayer>> GetByPlayerId(string playerId);
 }

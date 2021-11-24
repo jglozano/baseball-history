@@ -59,4 +59,19 @@ public class HomeGameController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
+    
+    // teamId, lgId, yearId
+    [HttpGet("{playerId}/{lgId}/{yearId}", Name = "GetHomeGameByTeamId")]
+    public async Task<ActionResult<List<HomeGame>>> Get(string teamId, string lgId, short yearId)
+    {
+        try
+        {
+            return Ok(await _supervisor.GetHomeGameByTeamId(teamId, lgId, yearId));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Something went wrong inside the HomeGameController GetByTeamId action: {ex}");
+            return StatusCode(500, "Internal server error");
+        }
+    }
 }

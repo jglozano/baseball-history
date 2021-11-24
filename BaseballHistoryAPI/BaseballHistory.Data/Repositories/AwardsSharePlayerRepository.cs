@@ -26,6 +26,11 @@ public class AwardsSharePlayerRepository : IAwardsSharePlayerRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<AwardsSharePlayer?> GetById(string playerId, short yearId, string lgId, string awardId)
     {
-        return await _context.AwardsSharePlayers.FindAsync(playerId, yearId, lgId, awardId);
+        return await _context.AwardsSharePlayers.FirstOrDefaultAsync(e => e.PlayerId == playerId && e.YearId == yearId && e.LgId == lgId && e.AwardId == awardId);
+    }
+
+    public async Task<List<AwardsSharePlayer>> GetByPlayerId(string playerId)
+    {
+        return await _context.AwardsSharePlayers.Where(e => e.PlayerId == playerId).ToListAsync();
     }
 }

@@ -26,6 +26,6 @@ public class TeamsFranchiseRepository : ITeamsFranchiseRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<TeamsFranchise?> GetById(string franchId)
     {
-        return await _context.TeamsFranchises.FindAsync(franchId);
+        return await _context.TeamsFranchises.FirstOrDefaultAsync(e => e.FranchId == franchId);
     }
 }

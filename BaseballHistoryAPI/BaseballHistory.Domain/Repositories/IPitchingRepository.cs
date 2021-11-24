@@ -7,4 +7,5 @@ public interface IPitchingRepository : IDisposable
     Task<int> GetTotalCount();
     Task<List<Pitching>> GetAll(int pageNumber, int pageSize);
     Task<Pitching?> GetById(string playerId, string teamId, short yearId, string lgId, short stint);
+    Task<List<Pitching>> GetByPlayerId(string playerId);
 }

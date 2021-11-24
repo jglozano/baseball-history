@@ -59,4 +59,19 @@ public class SeriesPostController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
+    
+    // teamId
+    [HttpGet("{teamId}", Name = "GetSeriesPostByTeamId")]
+    public async Task<ActionResult<List<SeriesPost>>> Get(string teamId)
+    {
+        try
+        {
+            return Ok(await _supervisor.GetSeriesPostByTeamId(teamId));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Something went wrong inside the SeriesPostController GetByTeamId action: {ex}");
+            return StatusCode(500, "Internal server error");
+        }
+    }
 }

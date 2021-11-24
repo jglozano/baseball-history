@@ -26,6 +26,11 @@ public class CollegePlayingRepository : ICollegePlayingRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<CollegePlaying?> GetById(string playerId, short yearId, string schoolId)
     {
-        return await _context.CollegePlayings.FindAsync(playerId, yearId, schoolId);
+        return await _context.CollegePlayings.FirstOrDefaultAsync(e => e.PlayerId == playerId && e.YearId == yearId && e.SchoolId == schoolId);
+    }
+
+    public async Task<List<CollegePlaying>> GetByPlayerId(string playerId)
+    {
+        return await _context.CollegePlayings.Where(e => e.PlayerId == playerId).ToListAsync();
     }
 }

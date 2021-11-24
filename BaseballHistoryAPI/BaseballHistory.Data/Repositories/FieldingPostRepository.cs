@@ -26,6 +26,11 @@ public class FieldingPostRepository : IFieldingPostRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<FieldingPost?> GetById(string playerId, string teamId, short yearId, string lgId, string round, string pos)
     {
-        return await _context.FieldingPosts.FindAsync(playerId, teamId, yearId, lgId, round, pos);
+        return await _context.FieldingPosts.FirstOrDefaultAsync(e => e.PlayerId == playerId && e.YearId == yearId && e.LgId == lgId && e.TeamId == teamId && e.Round == round && e.Pos == pos);
+    }
+
+    public async Task<List<FieldingPost>> GetByPlayerId(string playerId)
+    {
+        return await _context.FieldingPosts.Where(e => e.PlayerId == playerId).ToListAsync();
     }
 }

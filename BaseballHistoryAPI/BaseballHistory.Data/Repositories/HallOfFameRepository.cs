@@ -26,6 +26,11 @@ public class HallOfFameRepository : IHallOfFameRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<HallOfFame?> GetById(string playerId, short yearId, string votedBy)
     {
-        return await _context.HallOfFames.FindAsync(playerId, yearId, votedBy);
+        return await _context.HallOfFames.FirstOrDefaultAsync(e => e.PlayerId == playerId && e.YearId == yearId && e.VotedBy == votedBy);
+    }
+
+    public async Task<List<HallOfFame>> GetByPlayerId(string playerId)
+    {
+        return await _context.HallOfFames.Where(e => e.PlayerId == playerId).ToListAsync();
     }
 }

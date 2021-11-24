@@ -26,6 +26,11 @@ public class AppearanceRepository : IAppearanceRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<Appearance?> GetById(string playerId, short yearId, string lgId, string teamId)
     {
-        return await _context.Appearances.FindAsync(playerId, yearId, lgId, teamId);
+        return await _context.Appearances.FirstOrDefaultAsync(e => e.PlayerId == playerId && e.YearId == yearId && e.LgId == lgId && e.TeamId == teamId);
+    }
+
+    public async Task<List<Appearance>> GetByPlayerId(string playerId)
+    {
+        return await _context.Appearances.Where(e => e.PlayerId == playerId).ToListAsync();
     }
 }

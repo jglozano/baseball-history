@@ -26,6 +26,6 @@ public class PlayerFieldingTotalRepository : IPlayerFieldingTotalRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<PlayerFieldingTotal?> GetById(string playerId)
     {
-        return await _context.PlayerFieldingTotals.FindAsync(playerId);
+        return await _context.PlayerFieldingTotals.FirstOrDefaultAsync(p => p.PlayerId == playerId);
     }
 }

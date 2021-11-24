@@ -59,4 +59,19 @@ public class FieldingOfController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
+    
+    // playerId
+    [HttpGet("{playerId}", Name = "GetFieldingOfByPlayerId")]
+    public async Task<ActionResult<List<FieldingOf>>> Get(string playerId)
+    {
+        try
+        {
+            return Ok(await _supervisor.GetFieldingOfByPlayerId(playerId));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Something went wrong inside the FieldingOfController GetByPlayerId action: {ex}");
+            return StatusCode(500, "Internal server error");
+        }
+    }
 }

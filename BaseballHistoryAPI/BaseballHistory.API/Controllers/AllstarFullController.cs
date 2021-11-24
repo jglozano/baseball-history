@@ -60,4 +60,19 @@ public class AllstarFullController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
+    
+    // playerId
+    [HttpGet("{playerId}", Name = "GetAllstarFullByPlayerId")]
+    public async Task<ActionResult<List<AllstarFull>>> Get(string playerId)
+    {
+        try
+        {
+            return Ok(await _supervisor.GetAllstarFullByPlayerId(playerId));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Something went wrong inside the AllstarFullController GetByPlayerId action: {ex}");
+            return StatusCode(500, "Internal server error");
+        }
+    }
 }

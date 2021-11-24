@@ -59,4 +59,19 @@ public class FieldingOfsplitController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
+    
+    // playerId
+    [HttpGet("{playerId}", Name = "GetFieldingOfsplitByPlayerId")]
+    public async Task<ActionResult<List<FieldingOfsplit>>> Get(string playerId)
+    {
+        try
+        {
+            return Ok(await _supervisor.GetFieldingOfsplitByPlayerId(playerId));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Something went wrong inside the FieldingOfsplitController GetByPlayerId action: {ex}");
+            return StatusCode(500, "Internal server error");
+        }
+    }
 }

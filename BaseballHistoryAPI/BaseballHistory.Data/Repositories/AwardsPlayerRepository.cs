@@ -27,6 +27,11 @@ public class AwardsPlayerRepository : IAwardsPlayerRepository
 
     public async Task<AwardsPlayer?> GetById(string playerId, short yearId, string lgId, string awardId)
     {
-        return await _context.AwardsPlayers.FindAsync(playerId, yearId, lgId, awardId);
+        return await _context.AwardsPlayers.FirstOrDefaultAsync(e => e.PlayerId == playerId && e.YearId == yearId && e.LgId == lgId && e.AwardId == awardId);
+    }
+
+    public async Task<List<AwardsPlayer>> GetByPlayerId(string playerId)
+    {
+        return await _context.AwardsPlayers.Where(e => e.PlayerId == playerId).ToListAsync();
     }
 }

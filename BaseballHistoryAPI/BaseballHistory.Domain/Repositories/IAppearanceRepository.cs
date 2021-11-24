@@ -7,4 +7,5 @@ public interface IAppearanceRepository : IDisposable
     Task<int> GetTotalCount();
     Task<List<Appearance>> GetAll(int pageNumber, int pageSize);
     Task<Appearance?> GetById(string playerId, short yearId, string lgId, string teamId);
+    Task<List<Appearance>> GetByPlayerId(string playerId);
 }

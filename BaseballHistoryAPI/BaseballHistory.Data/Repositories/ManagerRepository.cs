@@ -26,6 +26,11 @@ public class ManagerRepository : IManagerRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<Manager?> GetById(string playerId, string teamId, short yearId, string lgId, short inseason)
     {
-        return await _context.Managers.FindAsync(playerId, teamId, yearId, lgId, inseason);
+        return await _context.Managers.FirstOrDefaultAsync(e => e.PlayerId == playerId && e.YearId == yearId && e.LgId == lgId && e.TeamId == teamId && e.Inseason == inseason);
+    }
+
+    public async Task<List<Manager>> GetByPlayerId(string playerId)
+    {
+        return await _context.Managers.Where(e => e.PlayerId == playerId).ToListAsync();
     }
 }

@@ -26,6 +26,11 @@ public class AllstarFullRepository : IAllstarFullRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<AllstarFull?> GetById(string playerId, string teamId, string lgId, short yearId, string gameId)
     {
-        return await _context.AllstarFulls.FindAsync(playerId, teamId, lgId, yearId, gameId);
+        return await _context.AllstarFulls.FirstOrDefaultAsync(e => e.PlayerId == playerId && e.TeamId == teamId && e.LgId == lgId && e.YearId == yearId && e.GameId == gameId);
+    }
+    
+    public async Task<List<AllstarFull>> GetByPlayerId(string playerId)
+    {
+        return await _context.AllstarFulls.Where(e => e.PlayerId == playerId).ToListAsync();
     }
 }

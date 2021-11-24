@@ -26,6 +26,11 @@ public class TeamBattingTotalRepository : ITeamBattingTotalRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<TeamBattingTotal?> GetById(string teamId, short yearId, string lgId)
     {
-        return await _context.TeamBattingTotals.FindAsync(teamId, yearId, lgId);
+        return await _context.TeamBattingTotals.FirstOrDefaultAsync(e => e.TeamId == teamId && e.YearId == yearId && e.LgId == lgId);
+    }
+
+    public async Task<List<TeamBattingTotal>> GetByTeamId(string teamId)
+    {
+        return await _context.TeamBattingTotals.Where(e => e.TeamId == teamId).ToListAsync();
     }
 }

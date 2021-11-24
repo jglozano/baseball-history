@@ -59,4 +59,19 @@ public class TeamBattingTotalController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
+    
+    // teamId
+    [HttpGet("{teamId}", Name = "GetTeamBattingTotalByTeamId")]
+    public async Task<ActionResult<List<TeamBattingTotal>>> Get(string teamId)
+    {
+        try
+        {
+            return Ok(await _supervisor.GetTeamBattingTotalByTeamId(teamId));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Something went wrong inside the TeamBattingTotalController GetByTeamId action: {ex}");
+            return StatusCode(500, "Internal server error");
+        }
+    }
 }

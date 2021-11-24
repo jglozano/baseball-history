@@ -7,4 +7,5 @@ public interface ISeriesPostRepository : IDisposable
     Task<int> GetTotalCount();
     Task<List<SeriesPost>> GetAll(int pageNumber, int pageSize);
     Task<SeriesPost?> GetById(string teamIdwinner, string lgIdwinner, short yearId, string round);
+    Task<List<SeriesPost>> GetByTeamId(string teamId);
 }

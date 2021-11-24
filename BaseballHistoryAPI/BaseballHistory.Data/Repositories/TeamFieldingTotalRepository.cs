@@ -26,6 +26,11 @@ public class TeamFieldingTotalRepository : ITeamFieldingTotalRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<TeamFieldingTotal?> GetById(string teamId, short yearId, string lgId)
     {
-        return await _context.TeamFieldingTotals.FindAsync(teamId, yearId, lgId);
+        return await _context.TeamFieldingTotals.FirstOrDefaultAsync(e => e.TeamId == teamId && e.YearId == yearId && e.LgId == lgId);
+    }
+
+    public async Task<List<TeamFieldingTotal>> GetByTeamId(string teamId)
+    {
+        return await _context.TeamFieldingTotals.Where(e => e.TeamId == teamId).ToListAsync();
     }
 }

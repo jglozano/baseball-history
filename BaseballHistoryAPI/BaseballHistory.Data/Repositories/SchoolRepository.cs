@@ -26,6 +26,6 @@ public class SchoolRepository : ISchoolRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<School?> GetById(string schoolId)
     {
-        return await _context.Schools.FindAsync(schoolId);
+        return await _context.Schools.FirstOrDefaultAsync(e => e.SchoolId == schoolId);
     }
 }

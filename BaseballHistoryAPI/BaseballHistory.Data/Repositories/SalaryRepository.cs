@@ -26,6 +26,11 @@ public class SalaryRepository : ISalaryRepository
         .AsNoTrackingWithIdentityResolution().ToListAsync();
     public async Task<Salary?> GetById(string playerId, string teamId, short yearId, string lgId)
     {
-        return await _context.Salaries.FindAsync(playerId, teamId, yearId, lgId);
+        return await _context.Salaries.FirstOrDefaultAsync(e => e.PlayerId == playerId && e.YearId == yearId && e.LgId == lgId && e.TeamId == teamId);
+    }
+
+    public async Task<List<Salary>> GetByPlayerId(string playerId)
+    {
+        return await _context.Salaries.Where(e => e.PlayerId == playerId).ToListAsync();
     }
 }
