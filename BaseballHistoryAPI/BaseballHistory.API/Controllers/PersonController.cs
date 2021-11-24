@@ -61,12 +61,12 @@ public class PersonController : ControllerBase
     }
     
     // lastName
-    [HttpGet("{lastName}", Name = "GetPersonByLastName")]
-    public async Task<ActionResult<List<Person>>> GetByLastName(string lastName)
+    [HttpGet("lastName/{lastName}", Name = "GetPersonByName")]
+    public async Task<ActionResult<List<Person>>> GetByName(string lastName)
     {
         try
         {
-            return Ok(await _supervisor.GetPersonByLastName(lastName));
+            return Ok(await _supervisor.GetPersonByName(lastName));
         }
         catch (Exception ex)
         {

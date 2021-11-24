@@ -29,7 +29,7 @@ public class PersonRepository : IPersonRepository
         return await _context.People.FirstOrDefaultAsync(e => e.PlayerId == playerId);
     }
 
-    public async Task<List<Person>> GetPlayerByLastName(string lastName)
+    public async Task<List<Person>> GetPlayerByName(string lastName)
     {
         return await _context.People.Where(e => e.NameLast == lastName).ToListAsync();
     }

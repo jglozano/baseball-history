@@ -413,9 +413,9 @@ public class BaseballHistorySupervisor : IBaseballHistorySupervisor
         return await _personRepository.GetById(playerId);
     }
 
-    public async Task<List<Person>> GetPersonByLastName(string lastName)
+    public async Task<List<Person>> GetPersonByName(string lastName)
     {
-        return await _personRepository.GetPlayerByLastName(lastName);
+        return await _personRepository.GetPlayerByName(lastName);
     }
 
     public Task<int> GetPitchingCount()

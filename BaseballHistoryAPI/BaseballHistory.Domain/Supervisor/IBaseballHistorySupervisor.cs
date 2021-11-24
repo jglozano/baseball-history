@@ -96,7 +96,7 @@ public interface IBaseballHistorySupervisor
     Task<int> GetPersonCount();
     Task<List<Person>> GetPerson(int pageNumber, int pageSize);
     Task<Person?> GetPersonById(string playerId);
-    Task<List<Person>> GetPersonByLastName(string lastName);
+    Task<List<Person>> GetPersonByName(string lastName);
     
     Task<int> GetPitchingCount();
     Task<List<Pitching>> GetPitching(int pageNumber, int pageSize);
